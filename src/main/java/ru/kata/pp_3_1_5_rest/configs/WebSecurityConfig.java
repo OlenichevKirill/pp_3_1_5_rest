@@ -2,6 +2,7 @@ package ru.kata.pp_3_1_5_rest.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,8 +39,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll();
-//        http.httpBasic().disable();
+                .permitAll()
+                .and()
+                .httpBasic(Customizer.withDefaults());
+      //  http.httpBasic().disable();
     }
 
     @Override

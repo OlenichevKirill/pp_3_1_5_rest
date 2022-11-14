@@ -35,7 +35,7 @@ public class User implements UserDetails {
     private int age;
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany()
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -46,14 +46,14 @@ public class User implements UserDetails {
 
 
     public User(Long id, String password, String firstName,
-                String lastName, int age, String email/*, Set<Role> roles*/) {
+                String lastName, int age, String email, Set<Role> roles) {
         this.id = id;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
-       /* this.roles = roles;*/
+        this.roles = roles;
     }
 
     public Set<Role> getRoles() {
