@@ -11,10 +11,9 @@
     <div class="row justify-content-between align-items-center bg-dark p-2">
         <div class="col-6 text-white">
             <h4>
-                <strong th:text="${user.getUsername()}"></strong>
+                <strong id="userInfo">111</strong>
                 <span class="font-weight-light">with roles: </span>
-                <span th:each="role:${user.getRoles()}">
-                <span class="font-weight-light" th:text="|${role.getRole()} |"></span>
+                <span id="userInfoRole">
                 </span>
             </h4>
         </div>
@@ -66,24 +65,10 @@
                                     <th>Role</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="align-middle" th:text="${user.getId()}"></td>
-                                    <td class="align-middle" th:text="${user.getFirstName()}"></td>
-                                    <td class="align-middle" th:text="${user.getLastName()}"></td>
-                                    <td class="align-middle" th:text="${user.getAge()}"></td>
-                                    <td class="align-middle" th:text="${user.getEmail()}"></td>
-                                    <td>
-                                        <span th:each="role:${user.getRoles()}">
-                                            <span th:text="|${role.getRole()} |"></span>
-                                        </span>
-                                    </td>
-                                </tr>
-                                </tbody>
+                                <tbody id="tbodyUserInfo"></tbody>
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -99,5 +84,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="user.js"></script>
 </body>
 </html>

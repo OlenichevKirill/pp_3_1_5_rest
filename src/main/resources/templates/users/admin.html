@@ -11,10 +11,9 @@
     <div class="row justify-content-between align-items-center bg-dark p-2">
         <div class="col-6 text-white">
             <h4>
-                <strong th:text="${userInfo.getUsername()}"></strong>
+                <strong id="userInfo">111</strong>
                 <span class="font-weight-light">with roles: </span>
-                <span th:each="role:${userInfo.getRoles()}">
-                <span class="font-weight-light" th:text="|${role.getRole()} |"></span>
+                <span id="userInfoRole">
                 </span>
             </h4>
         </div>
@@ -472,18 +471,7 @@
                                 <th>Email</th>
                                 <th>Role</th>
                                 </thead>
-                                <tbody>
-                                <td class="align-middle" th:text="${userInfo.getId()}"></td>
-                                <td class="align-middle" th:text="${userInfo.getFirstName()}"></td>
-                                <td class="align-middle" th:text="${userInfo.getLastName()}"></td>
-                                <td class="align-middle" th:text="${userInfo.getAge()}">></td>
-                                <td class="align-middle" th:text="${userInfo.getEmail()}"></td>
-                                <td class="align-middle">
-                                    <span th:each="role:${userInfo.getRoles()}">
-                                        <span th:text="|${role.getRole()} |"></span>
-                                    </span>
-                                </td>
-                                </tbody>
+                                <tbody id="tbodyUserInfo"></tbody>
                             </table>
                         </div>
                     </div>
@@ -492,6 +480,8 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="user.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
