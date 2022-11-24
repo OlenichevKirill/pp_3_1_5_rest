@@ -7,8 +7,6 @@ const userInfoRole = document.getElementById('userInfoRole')
 fetch(url)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
-
         userInfo.textContent = result.username
         let rolesInfoUser = ''
 
