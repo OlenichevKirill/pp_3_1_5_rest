@@ -1,7 +1,17 @@
 const urlAdmin = 'http://localhost:8080/admin/api/users/'
 const allUsers = document.getElementById('tBodyAllUsers')
+let allRoles = []
 
-// Заполнение страницы
+//Получаем все роли
+fetch(urlAdmin + "roles")
+    .then(response => response.json())
+    .then(result => {
+        for (let i = 0; i < result.length; i++) {
+            allRoles.push(result[i])
+        }
+    })
+
+// Заполнение данных на админской панеле
 let allUserTable = () => {
     fetch(urlAdmin)
         .then(response => response.json())
@@ -31,18 +41,31 @@ let allUserTable = () => {
                 </tr>`
             }
             allUsers.innerHTML = usersHTML
+            addOption('roleNew')
         })
 }
 
+allUserTable()
+
+// Создание и внедрение option в select
+function addOption(id) {
+    let selectHTML = ''
+    for (let i = 0; i < allRoles.length; i++) {
+        if (id === 'roleDelete'){
+            selectHTML += `<option value="${allRoles[i].id}" readonly>${allRoles[i].role}</option>`
+        } else {
+            selectHTML += `<option value="${allRoles[i].id}">${allRoles[i].role}</option>`
+        }
+    }
+    document.getElementById(id).innerHTML = selectHTML
+}
+
 // Событие при нажатие Edit в таблице пользователей
-function showEditModal(elem){
-    console.log(elem.dataset.id)
+function showEditModal(elem) {
     let id = elem.dataset.id
     fetch(urlAdmin + id)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
-            //document.forms.formEdit.age.value = result.id
             const formEdit = document.forms.formEdit
             formEdit.idEdit.value = result.id
             formEdit.nameEdit.value = result.firstName
@@ -51,18 +74,16 @@ function showEditModal(elem){
             formEdit.emailEdit.value = result.email
             formEdit.passwordEdit.value = result.password
         })
+    addOption('roleEdit')
     $('#modalEdit').modal('show')
 }
 
 // Событие при нажатие Delete в таблице пользователей
-function showDeleteModal(elem){
-    console.log(elem.dataset.id)
+function showDeleteModal(elem) {
     let id = elem.dataset.id
     fetch(urlAdmin + id)
         .then(response => response.json())
         .then(result => {
-            console.log(result)
-            //document.forms.formDelete.age.value = result.id
             const formDelete = document.forms.formDelete
             formDelete.idDelete.value = result.id
             formDelete.nameDelete.value = result.firstName
@@ -71,7 +92,7 @@ function showDeleteModal(elem){
             formDelete.emailDelete.value = result.email
             formDelete.passwordDelete.value = result.password
         })
+    addOption('roleDelete')
     $('#modalDelete').modal('show')
 }
 
-allUserTable()
