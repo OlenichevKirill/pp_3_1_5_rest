@@ -51,7 +51,7 @@ allUserTable()
 function addOption(id) {
     let selectHTML = ''
     for (let i = 0; i < allRoles.length; i++) {
-        if (id === 'roleDelete'){
+        if (id === 'roleDelete') {
             selectHTML += `<option value="${allRoles[i].id}" readonly>${allRoles[i].role}</option>`
         } else {
             selectHTML += `<option value="${allRoles[i].id}">${allRoles[i].role}</option>`
@@ -94,5 +94,51 @@ function showDeleteModal(elem) {
         })
     addOption('roleDelete')
     $('#modalDelete').modal('show')
+}
+
+//Событие сохранения newUser
+function saveUser() {
+    const formCreat = document.forms.formCreat
+    let rolesNewUser = []
+
+    for (let i = 0; i < formCreat.roleNew.options.length; i++) {
+        if (formCreat.roleNew.options[i].selected) {
+            let role = {
+                id: formCreat.roleNew.options[i].value,
+                role: formCreat.roleNew.options[i].textContent
+            }
+            rolesNewUser.push(role)
+        }
+    }
+
+    let User = {
+        firstName: formCreat.name.value,
+        lastName: formCreat.lastName.value,
+        age: formCreat.age.value,
+        email: formCreat.email.value,
+        password: formCreat.password.value,
+        roles: rolesNewUser,
+    }
+
+    fetch(urlAdmin, {
+        method: 'POST',
+        body: JSON.stringify(User),
+        headers: {
+            // Добавляем необходимые заголовки
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            const formCreat = document.forms.formCreat
+            formCreat.name.value = ''
+            formCreat.lastName.value = ''
+            formCreat.age.value = ''
+            formCreat.email.value = ''
+            formCreat.password.value = ''
+            allUserTable()
+            addOption('roleNew')
+        })
+
 }
 
