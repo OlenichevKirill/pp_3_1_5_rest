@@ -52,7 +52,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void updateUser(User user) {
         User userDb = userRepository.getById(user.getId());
-        user.setRoles(userDb.getRoles());
+        if (!userDb.getPassword().equals(user.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+        if (user.getRoles().isEmpty()){
+            user.setRoles(userDb.getRoles());
+        }
         userRepository.save(user);
     }
 

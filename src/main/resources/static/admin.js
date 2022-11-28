@@ -139,6 +139,63 @@ function saveUser() {
             allUserTable()
             addOption('roleNew')
         })
-
 }
 
+//Событие обновления User
+function updateUser(){
+    const formEdit = document.forms.formEdit
+    let rolesUser = []
+
+    for (let i = 0; i < formEdit.rolesEdit.options.length; i++) {
+        if (formEdit.rolesEdit.options[i].selected) {
+            let role = {
+                id: formEdit.rolesEdit.options[i].value,
+                role: formEdit.rolesEdit.options[i].textContent
+            }
+            rolesUser.push(role)
+        }
+    }
+
+    let User = {
+        id: formEdit.idEdit.value,
+        firstName: formEdit.nameEdit.value,
+        lastName: formEdit.lastNameEdit.value,
+        age: formEdit.ageEdit.value,
+        email: formEdit.emailEdit.value,
+        password: formEdit.passwordEdit.value,
+        roles: rolesUser,
+    }
+
+    console.log(User)
+
+    fetch(urlAdmin, {
+        method: 'PUT',
+        body: JSON.stringify(User),
+        headers: {
+            // Добавляем необходимые заголовки
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            allUserTable()
+            $('#modalEdit').modal('hide')
+        })
+}
+
+// Событие удаления User
+function deleteUser(){
+    const id = document.forms.formDelete.idDelete.value
+    fetch(urlAdmin + id, {
+        method: 'DELETE',
+        headers: {
+            // Добавляем необходимые заголовки
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) => {})
+        .then(() => {
+            allUserTable()
+            $('#modalDelete').modal('hide')
+        })
+}
