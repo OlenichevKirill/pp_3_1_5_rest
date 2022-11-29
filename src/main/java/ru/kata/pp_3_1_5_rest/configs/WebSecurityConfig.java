@@ -42,7 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .httpBasic(Customizer.withDefaults());
-      //  http.httpBasic().disable();
     }
 
     @Override

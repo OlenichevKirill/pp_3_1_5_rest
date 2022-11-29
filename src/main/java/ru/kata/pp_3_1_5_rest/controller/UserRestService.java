@@ -1,5 +1,7 @@
 package ru.kata.pp_3_1_5_rest.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,7 @@ import ru.kata.pp_3_1_5_rest.model.User;
 public class UserRestService {
 
     @GetMapping()
-    public User getAuUser(@AuthenticationPrincipal User user){
-        return user;
+    public ResponseEntity<User> getAuUser(@AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

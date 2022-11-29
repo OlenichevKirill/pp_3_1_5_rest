@@ -7,9 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.pp_3_1_5_rest.dao.RoleRepository;
 import ru.kata.pp_3_1_5_rest.dao.UserRepository;
-import ru.kata.pp_3_1_5_rest.model.Role;
 import ru.kata.pp_3_1_5_rest.model.User;
 
 import java.util.List;
@@ -19,13 +17,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -55,7 +51,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (!userDb.getPassword().equals(user.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
-        if (user.getRoles().isEmpty()){
+        if (user.getRoles().isEmpty()) {
             user.setRoles(userDb.getRoles());
         }
         userRepository.save(user);

@@ -28,12 +28,12 @@ public class AdminRestController {
 
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<User>> allUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
-    public User getUser(@PathVariable("id") long id) {
-        return userService.getUser(id);
+    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
+        return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
     @PostMapping("/users")
@@ -55,7 +55,7 @@ public class AdminRestController {
     }
 
     @GetMapping("/users/roles")
-    public ResponseEntity<Set<Role>> allRoles(){
+    public ResponseEntity<Set<Role>> allRoles() {
         return new ResponseEntity<>(roleService.getAllRoles(), HttpStatus.OK);
     }
 }

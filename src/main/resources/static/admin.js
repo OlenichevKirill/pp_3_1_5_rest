@@ -142,7 +142,7 @@ function saveUser() {
 }
 
 //Событие обновления User
-function updateUser(){
+function updateUser() {
     const formEdit = document.forms.formEdit
     let rolesUser = []
 
@@ -184,7 +184,7 @@ function updateUser(){
 }
 
 // Событие удаления User
-function deleteUser(){
+function deleteUser() {
     const id = document.forms.formDelete.idDelete.value
     fetch(urlAdmin + id, {
         method: 'DELETE',
@@ -193,7 +193,8 @@ function deleteUser(){
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then((response) => {})
+        .then((response) => {
+        })
         .then(() => {
             allUserTable()
             $('#modalDelete').modal('hide')
