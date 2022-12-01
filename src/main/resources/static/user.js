@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080/user/api'
+const url = 'http://localhost:8080/api/AuthUser'
 const userInfo = document.getElementById('userInfo')
 const tBodyUserInfo = document.getElementById('tbodyUserInfo')
 const userInfoRole = document.getElementById('userInfoRole')

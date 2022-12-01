@@ -9,12 +9,17 @@ import ru.kata.pp_3_1_5_rest.model.User;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping()
 public class UserController {
 
-    @GetMapping()
+    @GetMapping("/user")
     public String userInfo(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
         return "users/user";
+    }
+
+    @GetMapping("/admin")
+    public String showAdminPage() {
+        return "users/admin";
     }
 }

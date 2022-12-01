@@ -1,4 +1,4 @@
-const urlAdmin = 'http://localhost:8080/admin/api/users/'
+const urlAdmin = 'http://localhost:8080/api/users/'
 const allUsers = document.getElementById('tBodyAllUsers')
 let allRoles = []
 
